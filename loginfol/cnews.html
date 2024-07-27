@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsapp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg" style="background-image: linear-gradient(rgb(109, 109, 211), skyblue, rgb(75, 201, 201));">
+        <div class="container">
+            <h1>Welcome to cyber news </h1>
+        </div>
+    </nav>
+    
+
+    <div class="container">
+    
+        <div class="row content" id="news-container" data-page="1"></div>
+
+        <div class="row mt-4">
+            <div class="col-6 d-flex justify-content-start">
+                <button class="btn btn-primary" id="previous-page">Previous Page</button>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <button class="btn btn-primary" id="next-page">Next Page</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const apiKey = 'b1eb9a166f964867afdd22a4857da48d';
+        const pageSize = 10;
+
+        function buildApiUrl(pageNumber) {
+            return `https://newsapi.org/v2/everything?q=cybersecurity&apiKey=${apiKey}&pageSize=${pageSize}&page=${pageNumber}`;
+        }
+
+        async function fetchNews(pageNumber = 1) {
+            try {
+                const response = await fetch(buildApiUrl(pageNumber));
+                const data = await response.json();
+
+                if (data.status === 'ok') {
+                    displayNews(data.articles, data.totalResults, pageNumber);
+                    updatePaginationButtons(pageNumber, data.totalResults);
+                } else {
+                    console.error('Error fetching news:', data.message);
+                }
+            } catch (error) {
+                console.error('Error fetching news:', error);
+            }
+        }
+
+        function displayNews(articles, totalResults, currentPage) {
+            const newsContainer = document.getElementById('news-container');
+            newsContainer.innerHTML = '';
+            newsContainer.dataset.page = currentPage;
+
+            articles.forEach(article => {
+                const articleCard = document.createElement('div');
+                articleCard.classList.add('card', 'my-4', 'mx-2');
+                articleCard.style.width = '18rem';
+
+                let imageHTML = '';
+                if (article.urlToImage) {
+                    imageHTML = `<img src="${article.urlToImage}" class="card-img-top" alt="${article.title}">`;
+                }
+
+                articleCard.innerHTML = `
+                    ${imageHTML}
+                    <div class="card-body">
+                        <h5 class="card-title">${article.title}</h5>
+                        <p class="card-text">${article.description}</p>
+                        <a href="${article.url}" target="_blank" class="btn btn-primary">Read more</a>
+                    </div>
+                `;
+
+                newsContainer.appendChild(articleCard);
+            });
+
+            const resultCount = document.getElementById('resultCount');
+            resultCount.textContent = articles.length;
+        }
+
+        function updatePaginationButtons(currentPage, totalResults) {
+            const previousButton = document.getElementById('previous-page');
+            const nextButton = document.getElementById('next-page');
+
+            previousButton.disabled = currentPage === 1;
+            nextButton.disabled = (currentPage * pageSize) >= totalResults;
+        }
+
+        document.getElementById('previous-page').addEventListener('click', () => {
+            const currentPage = parseInt(document.getElementById('news-container').dataset.page);
+            if (currentPage > 1) {
+                fetchNews(currentPage - 1);
+            }
+        });
+
+        document.getElementById('next-page').addEventListener('click', () => {
+            const currentPage = parseInt(document.getElementById('news-container').dataset.page);
+            fetchNews(currentPage + 1);
+        });
+
+        // Initial fetch
+        fetchNews();
+    </script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

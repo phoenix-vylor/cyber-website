@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="container">
+      <div class="title">Login</div>
+      <form  name="f1" action ="pass.php" method = "POST">
+        <div class="user-details">
+            <div class="input-box">
+                <span class="details"> Username</span>
+                <input type="text" id="user"  placeholder="email" required name="email">
+            </div>
+            <div class="input-box">
+                <span class="details"> Password</span>
+                <input type="text" id="pass" placeholder="........" required name="password">
+            </div>
+        </div>
+        <div class="fpass">
+            <div class="items"> Remember me <input type="checkbox"></div>
+            <div class="items"><a href="forgetpwd.html">forget password</a></div>
+        </div>
+        <div class="button" >
+         <input type="submit"  id="btn" value="login" >
+        </div>
+        <div class="register">
+            <p>Not have an account ?<a href="registration.html">Register here</a></p>
+        </div>
+      </form>
+    </div>
+    
+    
+</body>
+</html>

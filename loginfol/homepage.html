@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="homepage.css">
+    <link rel="stylesheet" href="chatai.css">
+    <script src="https://kit.fontawesome.com/6f97cbbd1c.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="navbar-toggle">
+            <a href=""><i class="fas fa-bars">  </i></a>
+
+          </div>
+        <div class="navbar-up">
+            <img class="image" alt="">
+            <h1 class="para">CYBER SAFE </h1>
+        </div>
+        <div class="navbar-down">
+            <a class="a-ele"> Home</a>
+            <a class="a-ele" href=> About</a>
+            <a class="a-ele" href= aform.html>Complaint</a>
+            <a class="a-ele" href=> News</a>
+            <a class="a-ele" href=>cyber crimes</a>
+            <a class="a-ele"href=>Resources</a>
+
+            <a class="login-button" href="login.html"> login</a>
+        </div>
+        <div class="quote">
+            <h1>
+                "Life is a series of challenges; your ability to overcome them defines your strength. Face each hurdle
+                with courage and determination."
+
+            </h1>
+        </div>
+    </div>
+    <div class="chatbot-container">
+        <div class="chatbot-header">
+            <h3>Chat AI</h3>
+            <button class="chatbot-close">&times;</button>
+        </div>
+        <div class="chatbot-messages">
+            <div class="chatbot-message bot">Hello! How may I assist you today?</div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Type a message..." />
+            <button class="chatbot-send">Send</button>
+        </div>
+    </div>
+    <button class="chatbot-toggle"><i class="fas fa-comment-dots"></i></button>
+    <footer>
+        <div class="foot">
+            <div class="footer-content">
+                <h3>Contact us</h3>
+                <p>Email:info@email.com</p>
+                <p>phone:+91 33330888088</p>
+                <p>Address:parul university,Vadodara,Gujarat</p>
+            </div>
+            <div class="footer-content">
+                <h3>Quick links</h3>
+                <ul class="list">
+                    <li><a href="">Home</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">News</a></li>
+                    <li><a href="">Complaint</a></li>
+                    <li><a href="">Cyber crimes</a></li>
+                    <li><a href="">Resources</a></li>
+                </ul>
+            </div>
+            <div class="footer-content">
+                <h3>Follow Us</h3>
+                <ul class="social-icons">
+                <li><a href=""><i class="fab fa-facebook"></i></a></li>
+                <li><a href=""><i class="fab fa-instagram"></i></a></li>
+                <li><a href=""><i class="fab fa-twitter"></i></a></li>
+                <li><a href=""><i class="fab fa-linkedin"></i></a></li>
+            </ul>
+            </div>
+           
+
+        </div>
+        <div class="bottom-bar">
+            <p>&copy;2023 cyber safe.All rights reserved</p>
+        </div>
+    </footer>
+    <script>
+        document.querySelector('.chatbot-toggle').addEventListener('click', function() {
+            document.querySelector('.chatbot-container').style.display = 'flex';
+            this.style.display = 'none';
+        });
+    
+        document.querySelector('.chatbot-close').addEventListener('click', function() {
+            document.querySelector('.chatbot-container').style.display = 'none';
+            document.querySelector('.chatbot-toggle').style.display = 'flex';
+        });
+    
+        document.querySelector('.chatbot-send').addEventListener('click', function() {
+            const input = document.querySelector('.chatbot-input input');
+            const message = input.value.trim();
+            if (message) {
+                const messageContainer = document.createElement('div');
+                messageContainer.textContent = message;
+                document.querySelector('.chatbot-messages').appendChild(messageContainer);
+
+    
+
+                 
+                const botReply = document.createElement('div');
+                botReply.classList.add('chatbot-message', 'bot');
+
+                
+                if (message.toLowerCase().includes('hello')) {
+                    botReply.textContent = 'Hello! How may I help you today?';
+                } else if (message.toLowerCase().includes('help')) {
+                    botReply.textContent = 'You can contact us at 18000 345 123 for further queries.';
+                } else if (message.toLowerCase().includes('resources')) {
+                    botReply.textContent = 'In the Resources section, you will find Books, Related Websites, and News. How can I assist you with these?';
+                } else if (message.toLowerCase().includes('books')) {
+                    botReply.textContent = 'In the Resources section, you can find a list of recommended books on cybersecurity.';
+                } else if (message.toLowerCase().includes('websites')) {
+                    botReply.textContent = 'In the Resources section, you can find links to websites that provide valuable information on cybersecurity.';
+                } else if (message.toLowerCase().includes('news')) {
+                    botReply.textContent = 'In the Resources section, you can find the latest news articles related to cybersecurity.';
+                } else {
+                    botReply.textContent = 'Please login to access more features and get detailed assistance.';
+                }
+                document.querySelector('.chatbot-messages').appendChild(botReply);
+                input.value = '';
+                
+            }
+        });
+        document.querySelector('.navbar-toggle a').addEventListener('click', function() {
+            const navbarDown = document.querySelector('.navbar-down');
+            if (navbarDown.style.display === 'flex') {
+                navbarDown.style.display = 'none';
+            } else {
+                navbarDown.style.display = 'flex';
+            }
+        });
+    </script>
+    </body>
+    </html>
